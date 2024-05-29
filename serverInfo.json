@@ -1,0 +1,18 @@
+{
+  "imap": {
+    "auth": {
+      "pass": "YourPass!2021@",
+      "user": "test@fakecontoso.pl"
+    },
+    "host": "195.78.66",
+    "port": 143
+  },
+  "smtp": {
+    "auth": {
+      "pass": "",
+      "user": ""
+    },
+    "host": "smtp.freesmtpservers.com",
+    "port": 25
+  }
+}
