@@ -1,18 +1,18 @@
 {
   "imap": {
     "auth": {
-      "pass": "YourPass!2021@",
-      "user": "test@fakecontoso.pl"
+      "pass": "j4okaOqgC5AFFwE1TbClAEmKVDVkxG0L",
+      "user": "HS4AEiSEygKeW2BvHxKxfsK5pjDdViHy"
     },
-    "host": "195.78.66",
-    "port": 143
+    "host": "mailslurp.click",
+    "port": 1143
   },
   "smtp": {
     "auth": {
-      "pass": "",
-      "user": ""
+      "pass": "yyQXuiXgAM52FygrpVIZHKbCVo3kTuQv",
+      "user": "tbtQDSCwUqJ0ZMR0nwjHBrbrKrgxIze2"
     },
-    "host": "smtp.freesmtpservers.com",
-    "port": 25
+    "host": "mxslurp.click",
+    "port": 2525
   }
 }

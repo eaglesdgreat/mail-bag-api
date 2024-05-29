@@ -2,7 +2,7 @@ import Datastore from "nedb";
 import path from "path"
 
 export interface IContact {
-  id?: number;
+  _id?: number;
   name: string;
   email: string
 }
@@ -47,9 +47,27 @@ export class Worker {
         if (error) {
           reject(error);
         } else {
-          resolve("");
+          resolve('');
         }
       });
     })
+  }
+
+  public updateContact(contact: IContact): Promise<IContact> {
+    return new Promise((resolve, reject) => {
+      this.db.update({ _id: contact?._id }, contact, {}, (error: Error | null, numUpdated: number) => {
+        if (error) {
+          reject(error)
+        } else {
+          this.db.find({ _id: contact?._id }, (error: Error, doc: IContact) => {
+            if (error) {
+              reject(error)
+            } else {
+              resolve(doc);
+            }
+          })
+        }
+      })
+    });
   }
 }

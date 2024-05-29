@@ -9,9 +9,10 @@ export const allMailboxes = async (req: Request, res: Response) => {
     const imapWorker: IMAP.Worker = new IMAP.Worker(serverInfo);
     const mailBoxes: IMAP.IMailbox[] = await imapWorker.listMailboxes();
 
-    res.json(mailBoxes);
+    res.status(200).json(mailBoxes);
   } catch(err: any) {
-    res.json({ error: err });
+    console.log('err', err)
+    res.status(400).json({ error: err });
   }
 }
 
@@ -20,8 +21,8 @@ export const mailboxById = async (req: Request, res: Response) => {
     const imapWorker: IMAP.Worker = new IMAP.Worker(serverInfo);
     const messages: IMAP.IMessage[] = await imapWorker.listMessages({ mailbox: req.params.mailbox });
 
-    res.json(messages);
+    res.status(200).json(messages);
   } catch (err: any) {
-    res.json({ error: err });
+    res.status(400).json({ error: err });
   }
 }

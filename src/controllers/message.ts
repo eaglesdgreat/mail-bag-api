@@ -13,9 +13,9 @@ export const getMailboxMessageById = async (req: Request, res: Response) => {
       id: parseInt(req.params.id, 10)
     });
 
-    res.send(messageBody);
+    res.status(200).send(messageBody);
   } catch (error: any) {
-    res.json({ error });
+    res.status(400).json({ error });
   }
 }
 
@@ -27,9 +27,9 @@ export const deleteMailboxMessageById = async (req: Request, res: Response) => {
       id: parseInt(req.params.id, 10)
     });
 
-    res.send('ok');
+    res.status(200).send('ok');
   } catch (error) {
-    res.json({ error });
+    res.status(400).json({ error });
   }
 }
 
@@ -38,8 +38,8 @@ export const createMessage = async (req: Request, res: Response) => {
     const smtpWorker: SMTP.Worker = new SMTP.Worker(serverInfo);
     await smtpWorker.sendMessage(req.body)
 
-    res.send('ok');
+    res.status(201).send('ok');
   } catch (error) {
-    res.json({ error });
+    res.status(400).json({ error });
   }
 }
