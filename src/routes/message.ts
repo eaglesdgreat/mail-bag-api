@@ -7,8 +7,8 @@ import express, { Router } from "express";
 
 const router: Router = express.Router();
 
+router.post('/', createMessage);
 router.get('/:mailbox/:id', getMailboxMessageById);
 router.delete('/:mailbox/:id', deleteMailboxMessageById);
-router.post('/:', createMessage);
 
 export default router;
