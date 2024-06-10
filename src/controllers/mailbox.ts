@@ -11,8 +11,7 @@ export const allMailboxes = async (req: Request, res: Response) => {
 
     res.status(200).json(mailBoxes);
   } catch(err: any) {
-    console.log('err', err)
-    res.status(400).json({ error: err });
+    res.status(400).json({ error: err.message });
   }
 }
 
@@ -23,6 +22,6 @@ export const mailboxById = async (req: Request, res: Response) => {
 
     res.status(200).json(messages);
   } catch (err: any) {
-    res.status(400).json({ error: err });
+    res.status(400).json({ error: err.message });
   }
 }

@@ -10,8 +10,8 @@ export const allContacts = async (req: Request, res: Response) => {
     const contacts: IContact[] = await contactWorker.listContacts();
     
     res.status(200).json(contacts);
-  } catch (error) {
-    res.status(400).json({ error });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
 }
 
@@ -21,8 +21,8 @@ export const createContact = async (req: Request, res: Response) => {
     const contact: IContact = await contactWorker.addContact(req.body);
 
     res.status(201).json(contact);
-  } catch (error) {
-    res.status(400).json({ error });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
 }
 
@@ -32,8 +32,8 @@ export const deleteContactById = async (req: Request, res: Response) => {
     await contactWorker.deleteContact(req.params.id);
 
     res.status(200).send('ok');
-  } catch (error) {
-    res.status(400).json({ error });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
 }
 
@@ -43,7 +43,7 @@ export const updateContact = async (req: Request, res: Response) => {
     const contact: IContact = await contactWorker.updateContact(req.body)
 
     res.status(200).json(contact);
-  } catch (error) {
-    res.status(400).json({ error });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
   }
 }

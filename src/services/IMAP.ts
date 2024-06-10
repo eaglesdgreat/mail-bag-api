@@ -9,10 +9,17 @@ export interface ICallOption {
   id?: number;
 }
 
+interface IAddress {
+  address: string;
+  name: string
+}
+
 export interface IMessage {
   id: string;
   date: string;
-  from: string;
+  from: IAddress[] | null;
+  to?: IAddress[] | null;
+  sender?: IAddress[] | null;
   subject: string;
   body?: string;
 }
@@ -23,7 +30,7 @@ export interface IMailbox {
 }
 
 // Tells node to skip checking certificate validation with TLS
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export class Worker {
   private static serverInfo: IServerInfo;
@@ -77,22 +84,25 @@ export class Worker {
       return [];
     }
 
-    const messages: any[] = await client.listMessages(option.mailbox, "1:*", ["uid", "envelop"]);
+    const messages: any[] = await client.listMessages(option.mailbox, "1:*", ["uid", "envelope", "flags"]);
+    console.log(messages)
     await client.close();
 
     const finalMessages: IMessage[] = [];
     messages.forEach((message: any) => {
       finalMessages.push({
         id: message.uid,
-        date: message.envelop.date,
-        from: message.envelop.from[0].address,
-        subject: message.envelop.subject,
+        date: message.envelope?.date ?? "",
+        from: message.envelope?.from ?? null,
+        to: message.envelope?.to ?? null,
+        sender: message.envelope?.sender ?? null,
+        subject: message.envelope?.subject ?? "",
       })
     });
     return finalMessages;
   }
 
-  public async getMessageBody(option: ICallOption): Promise<string | undefined> {
+  public async getMessageBody(option: ICallOption): Promise<string | boolean> {
     const client: any = await this.connectToServer();
     const messages: any[] = await client.listMessages(
       option.mailbox, option.id,
@@ -103,7 +113,7 @@ export class Worker {
     const parsed: ParsedMail = await simpleParser(messages[0]["body[]"]);
     await client.close();
 
-    return parsed.text;
+    return parsed.text ?? "";
   }
 
   public async deleteMessages(option: ICallOption): Promise<any> {

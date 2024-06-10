@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "node ./node_modules/typescript/bin/tsc",
-    "start": "yarn clean && yarn build && node ./dist/index.js",
+    "start": "yarn build && node ./dist/index.js",
     "dev": "node ./node_modules/nodemon/bin/nodemon -e ts --exec yarn start"
   },
   "devDependencies": {
