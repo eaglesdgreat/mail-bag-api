@@ -85,7 +85,6 @@ export class Worker {
     }
 
     const messages: any[] = await client.listMessages(option.mailbox, "1:*", ["uid", "envelope", "flags"]);
-    console.log(messages)
     await client.close();
 
     const finalMessages: IMessage[] = [];
