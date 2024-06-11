@@ -30,7 +30,7 @@ export interface IMailbox {
 }
 
 // Tells node to skip checking certificate validation with TLS
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 export class Worker {
   private static serverInfo: IServerInfo;

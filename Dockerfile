@@ -15,7 +15,7 @@ RUN cd /app && yarn install --pure-lockfile
 COPY . /app
 
 # exposed port
-EXPOSE 8000
+EXPOSE 1337
 
 # Define the entry point for the container
 CMD ["yarn", "start"]
